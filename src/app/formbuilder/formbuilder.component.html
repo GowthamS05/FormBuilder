@@ -1,0 +1,320 @@
+<div class="container-fluid mt-2">
+    <h3 style="text-align: 'center'">FORM BUILDER</h3>
+    <div class="row mt-4">
+        <div class="col-4">
+
+            <h4>Select Fields</h4>
+            <p>Customize your form by drag and drop below fields to the form area.</p>
+            <div class="dragElement">
+                <div class="fields" *ngFor="let item of fieldModels">
+                    <div class="field pointer shadow-bg" [dndDraggable]="item" [dndEffectAllowed]="'copy'"
+                        (dndEnd)="onDragEnd($event)">
+                        <i [ngClass]="item.icon" class="fa pull-left"></i>
+                        <h5>{{item.label}}</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-8 customCard customCard-3">
+
+            <section dndDropzone (dndDragover)="onDragover($event)" (dndDrop)="onDrop($event,model.attributes)"
+                class="dndDropArea commonHeight" [ngClass]="{'empty':model.attributes.length == 0}">
+
+                <div class="field" *ngFor="let item of model.attributes;let i= index;" (dndStart)="onDragStart($event)"
+                    (dndCanceled)="onDragCanceled($event)" (dndMoved)="onDragged(item, model.attributes, 'move')"
+                    [dndEffectAllowed]="'all'" [dndDraggable]="item">
+                    <div class="row form-group">
+                        <div class="col-1"><i class="fa fa-ellipsis-v dndHandle" dndHandle></i></div>
+                        <div class="col-7">
+                            <div *ngIf="item.type=='heading'">
+                                <p [ngClass]="[item.defaultClass,item.alignHeader]">{{item.value}}</p>
+                            </div>
+                            <div *ngIf="item.type=='text' || item.type=='email' || item.type=='password'"
+                                class="form-group {{item.layout}}">
+                                <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <input type={{item.type}} class={{item.className}}
+                                        placeholder="{{item.placeholder}}">
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='date'" class="form-group {{item.layout}}">
+                                <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <input type={{item.type}} class={{item.className}}>
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='number'" class="form-group {{item.layout}}">
+                                <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <input type={{item.type}} class={{item.className}}
+                                        placeholder="{{item.placeholder}}" min="{{item.min}}" max="{{item.max}}">
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='textarea'" class="form-group {{item.layout}}">
+                                <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <textarea class={{item.className}} placeholder="{{item.placeholder}}"
+                                        rows={{item.rows}}></textarea>
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='checkbox'" class="form-group {{item.layout}}">
+                                <label class="col-3">{{item.label}}<span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9" class="inline">
+                                    <div *ngFor="let v of item.values" class="mr-3">
+                                        <label class="cust-check-bx">
+                                            <input type="checkbox" [value]="v.value" name="{{item.name}}"> {{v.label}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='radio'" class="form-group {{item.layout}}">
+                                <label class="col-3">{{item.label}} <span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9" class="inline">
+                                    <div class="mr-3" *ngFor="let v of item.values">
+                                        <label class="cust-check-bx">
+                                            <input type="radio" [value]="v.value" name="{{item.name}}"> {{v.label}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="item.type=='select'" class="form-group {{item.layout}}">
+                                <label class="col-3">{{item.label}}<span *ngIf="item.required"
+                                        class="text-danger">*</span></label>
+                                <div class="col-9">
+                                    <select class="form-control" name="{{item.name}}">
+                                        <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div *ngIf="item.type=='button'" [ngClass]="['btn-cont',item.alignHeader]">
+                                <input type="{{item.subtype}}" value="{{item.label}}" class="btn btn-primary">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <i *ngIf="item.toggle" (click)="item.toggle=false" class="fa fa-chevron-up pull-right"></i>
+                            <i *ngIf="!item.toggle" (click)="item.toggle=true"
+                                class="fa fa-chevron-down pull-right"></i>
+                            <i (click)="removeField(i)" class="fa fa-trash pull-right"></i>
+                        </div>
+                    </div>
+                    <!--Toggle-->
+                    <div *ngIf="item.toggle" class="toggle-Wrapper">
+                        <div class="form-group row" *ngIf="item.type!=='heading' && item.type!=='button'">
+                            <label class="col-2"><b>Required</b></label>
+                            <div class="col-8">
+                                <i *ngIf="item.required" (click)="item.required=false" class="fa fa-toggle-on red"></i>
+                                <i *ngIf="!item.required" (click)="item.required=true" class="fa fa-toggle-off"></i>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="item.type!=='heading'">
+                            <label class="col-2"><b>Label</b></label>
+                            <div class="col-8">
+                                <input class="form-control col-8" type="text" [(ngModel)]="item.label" />
+                            </div>
+                        </div>
+                        <div class="form-group row"
+                            *ngIf="item.type!=='heading' && item.type!=='button' && item.type!='radio' && item.type!='date' && item.type!='checkbox'">
+                            <label class="col-2"><b>Placeholder</b></label>
+                            <div class="col-8">
+                                <input class="form-control" type="text" [(ngModel)]="item.placeholder" />
+                            </div>
+                        </div>
+                        <div class="form-group row"
+                            *ngIf="item.type!=='heading' && item.type!=='paragraph' && item.type!=='button'">
+                            <label class="col-2"><b>Choose Layout</b></label>
+                            <div class=" col-8">
+                                <div class="form-check form-check-inline" *ngFor="let layout of item.layoutList">
+                                    <input class="form-check-input" type="radio" name="{{'layout' + item.name}}"
+                                        value="{{layout.value}}" [(ngModel)]="item.layout"
+                                        (ngModelChange)="item.layout=layout.value">
+                                    <label class="form-check-label" for="layout.value">{{layout.label}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group row" *ngIf="item.type==='text'">
+                            <label class="col-2"><b>Choose type</b></label>
+                            <div class="col-8">
+                                <select class="custom-select" [(ngModel)]="item.type"
+                                    (onModelChange)="item.type=$event.target.value">
+                                    <option value="text">Text</option>
+                                    <option value="email">E-mail</option>
+                                    <option value="password">Password</option>
+                                </select>
+                            </div>
+                        </div> -->
+                        <div class="form-group row" *ngIf="item.type==='number'">
+                            <label class="col-2"><b>Min Value</b></label>
+                            <div class="col-4">
+                                <input class="form-control" type="number" [(ngModel)]="item.min" />
+                            </div>
+                            <label class="col-2"><b>Max Value</b></label>
+                            <div class="col-4">
+                                <input class="form-control" type="number" [(ngModel)]="item.max" />
+                            </div>
+                        </div>
+                        <!--Heading-->
+                        <div class="form-group" *ngIf="item.type==='heading'">
+                            <div class="form-group row">
+                                <label class="col-3"><b>Change Heading</b></label>
+                                <div class="col-9">
+                                    <input class="form-control" type="text" [(ngModel)]="item.value" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3"><b>Choose the heading Size</b></label>
+                                <div class="col-9">
+                                    <div class="form-check form-check-inline" *ngFor="let header of item.listOfClass">
+                                        <input class="form-check-input" type="radio" name="{{'header'+ item.name}}"
+                                            value="{{header.value}}" [(ngModel)]="item.defaultClass"
+                                            (ngModelChange)="item.defaultClass = header.value">
+                                        <label class="form-check-label" for="header.value">{{header.label}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row" *ngIf="item.type==='heading' || item.type==='button'">
+                            <label class="col-3"><b>Align Header</b></label>
+                            <div class="col-9">
+                                <div class="form-check form-check-inline" *ngFor="let align of item.alignItems">
+                                    <input class="form-check-input" type="radio" name="{{'align'+ item.name}}"
+                                        value="{{align.class}}" [(ngModel)]="item.alignHeader"
+                                        (ngModelChange)="item.alignHeader = align.class">
+                                    <label class="form-check-label" for="align.class">{{align.label}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Heading-->
+                        <!--Email-->
+                        <div class="form-check form-check-inline" *ngIf="item?.regex">
+                            <input class="form-check-input" type="checkbox" name="{{'emailValidation' + item.name}}"
+                                value="emailValidation" [(ngModel)]="item.validation">
+                            <label class="form-check-label">Does Email Validation Required</label>
+                        </div>
+                        <!--Email-->
+                        <!--TextArea-->
+                        <div class="form-group row" *ngIf="item.type==='textarea'">
+                            <label class="col-2"><b>Text Area Height</b></label>
+                            <div class="col-4">
+                                <input class="form-control" type="number" [(ngModel)]="item.rows" />
+                            </div>
+                        </div>
+                        <!--TextArea-->
+                        <!--Radio-->
+                        <div *ngIf="item.type=='radio' || item.type==='checkbox' || item.type=='select'">
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label><b>Label</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label><b>Value</b></label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label><b>Action</b></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngFor="let i of item.values; let valueIndex=index;" class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" [(ngModel)]="i.label" />
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" [(ngModel)]="i.value" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label (click)="item.values.splice(valueIndex,1)"><i
+                                                class="fa fa-times fa-3x color-red" aria-hidden="true"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" [(ngModel)]="value.label" />
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" [(ngModel)]="value.value" />
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="form-group">
+                                        <label (click)="addValue(item.values)"><i class="fa fa-plus fa-3x color-green"
+                                                aria-hidden="true"></i></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Radio-->
+                    </div>
+                </div>
+
+                <div class="dndPlaceholder center greyColor font20" dndPlaceholderRef>
+                    DROP ELEMENT HERE
+                </div>
+
+                <div class="center greyColor dragAndDropText verticalCenter" *ngIf="model.attributes.length===0">
+                    DRAG AND DROP HERE
+                </div>
+            </section>
+
+        </div>
+    </div>
+    <br />
+    <div style="text-align: center;" *ngIf="!updateId">
+        <input class="btn btn-primary" type="submit" value="Create Form" data-toggle="modal" data-target="#modalForm">
+    </div>
+    <div style="text-align: center;" *ngIf="updateId">
+        <input class="btn btn-primary" type="submit" value="Update Form" data-toggle="modal" data-target="#modalForm">
+    </div>
+</div>
+<!--Modal-->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Save Changes</h5>
+
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="staticEmail" class="col-form-label col-8">
+                        Enter Form Name <span class="text-danger">*</span></label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" name="formName" [(ngModel)]="formName" required>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    #closeCreateFormModal>Close</button>
+                <button *ngIf="!updateId" type="button" [disabled]="!formName" class="btn btn-primary"
+                    (click)="createForm(updateId)">Create
+                    Form</button>
+                <button *ngIf="updateId" type="button" [disabled]="!formName" class="btn btn-primary"
+                    (click)="createForm(updateId)">Update
+                    Form</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal-->

@@ -1,0 +1,11 @@
+.inline{
+    display: flex;
+}
+.dragElement {
+    height: calc(100vh - 40vh);
+    overflow-y: auto;
+}
+.dragAndDropText{
+    margin-top: calc(100vh - 70vh);
+    font-size: 30px;
+}

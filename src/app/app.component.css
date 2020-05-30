@@ -1,0 +1,13 @@
+.dragElement{
+    width: 100%;
+    height: calc(100vh - 20vw);
+    overflow: auto;
+}
+.verticalCenter{
+    height: calc(100vh - 16vw);
+}
+.dragAndDropText{
+    font-size: 30px;
+    opacity: 0.7;
+    font-weight: 600;
+}

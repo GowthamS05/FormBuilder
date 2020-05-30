@@ -1,0 +1,11 @@
+.generatedForm{
+    width: 50%;
+    margin: 0.5% 0 0.5% 0;
+}
+.alignCenter{
+    display:flex;
+    justify-content: center;
+}
+.inline{
+    display: flex;
+}

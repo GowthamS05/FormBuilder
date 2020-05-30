@@ -1,0 +1,53 @@
+<app-loader [loader]="isLoading"></app-loader>
+
+<div class="container table-responsive">
+    <h2 class="text-center m-4">List of Forms Created</h2>
+    <table class="table m-4 table-striped header-fixed">
+        <thead>
+            <tr>
+                <th>Form Id</th>
+                <th>Form Name</th>
+                <th>Created on</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="formList.length>0">
+            <tr *ngFor="let list of formList;let i = index">
+                <td class="filterable-cell">{{i+1}}</td>
+                <td class="filterable-cell"><a routerLink="{{list.id}}/detail">{{list.formName}}</a></td>
+                <td class="filterable-cell">{{list.createdDate}}</td>
+                <td class="filterable-cell" style="text-align:'left'">
+                    <i class="fa fa-trash-o color-red marginLeftRight" aria-hidden="true" data-toggle="modal"
+                        data-target="#deleteFormData"> </i>
+                    <a routerLink="{{list.id}}/form"> <i class="fa fa-pencil marginLeftRight color-yellow"
+                            aria-hidden="true"></i></a>
+                    <a routerLink="{{list.id}}/detail"> <i class="fa fa-eye marginLeftRight color-green"
+                            aria-hidden="true"></i></a>
+                </td>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteFormData" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete Form</h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you sure do you want to delete the form ?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    #closeDeleteForm>Close</button>
+                                <button type="button" class="btn btn-primary" (click)="deleteForm(list)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal-->
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg" (click)="navigateTOFormBuilder()">Generate Form</button>
+    </div>
+</div>

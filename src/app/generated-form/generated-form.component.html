@@ -1,0 +1,88 @@
+<app-loader [loader]="isLoading"></app-loader>
+<div class="alignCenter" *ngIf="formDetail.data.length>0">
+
+    <div class="generatedForm" *ngIf="formDetail.data.length>0">
+        <form id={{formDetail.id}} class="ftheme" (ngSubmit)="onFormSubmit(f)" #f="ngForm">
+            <div *ngFor="let item of formDetail.data">
+                <div class="mb-4 mt-1" *ngIf="item.type=='heading'">
+                    <p [ngClass]="[item.defaultClass,item.alignHeader]">{{item.value}}</p>
+                </div>
+                <div *ngIf="(item.type=='text' || item.type=='email' || item.type=='password') && item?.subtype!='Phone'"
+                    class="form-group {{item.layout}}">
+                    <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                            class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <input type={{item.type}} class={{item.className}} placeholder="{{item.placeholder}}"
+                            [(ngModel)]="item.value" name="{{item.name}}" [required]="item.required">
+                    </div>
+                </div>
+                <div *ngIf="item.type=='number'" class="form-group {{item.layout}}">
+                    <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                            class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <input type={{item.type}} class={{item.className}} placeholder="{{item.placeholder}}"
+                            min="{{item.min}}" max="{{item.max}}" [(ngModel)]="item.value" name="{{item.name}}">
+                    </div>
+                </div>
+                <div *ngIf="item?.subtype=='Phone'" class="form-group {{item.layout}}">
+                    <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                            class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <input type={{item.type}} class={{item.className}} placeholder="{{item.placeholder}}"
+                            (keypress)="isNumber($event)" [(ngModel)]="item.value" name="{{item.name}}">
+                    </div>
+                </div>
+                <div *ngIf="item?.type=='textarea'" class="form-group {{item.layout}}">
+                    <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                            class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <textarea class={{item.className}} name="{{item.name}}" [(ngModel)]="item.value"
+                            placeholder="{{item.placeholder}}" rows={{item.rows}}></textarea>
+                    </div>
+                </div>
+                <div *ngIf="item.type=='radio'" class="form-group {{item.layout}}">
+                    <label class="col-3">{{item.label}} <span *ngIf="item.required" class="text-danger">*</span></label>
+                    <div class="col-9 inline">
+                        <div class="mr-3" *ngFor="let v of item.values">
+                            <label class="cust-check-bx">
+                                <input type="radio" [value]="v.value" name="{{item.name}}" [(ngModel)]="item.value"
+                                    name="{{item.name}}"> {{v.label}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="item.type=='checkbox'" class="form-group {{item.layout}}">
+                    <label class="col-3">{{item.label}}<span *ngIf="item.required" class="text-danger">*</span></label>
+                    <div class="col-9 inline">
+                        <div *ngFor="let v of item.values" class="mr-3">
+                            <label class="cust-check-bx">
+                                <input type="checkbox" [value]="v.value" name="{{item.name}}" [value]="v.value"
+                                    (click)="toggleValue(v)">
+                                {{v.label}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="item.type=='select'" class="form-group {{item.layout}}">
+                    <label class="col-3">{{item.label}}<span *ngIf="item.required" class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <select class="form-control" name="{{item.name}}" [(ngModel)]="item.value">
+                            <option *ngFor="let v of item.values" [value]="v.value">{{v.label}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div *ngIf="item.type=='date'" class="form-group {{item.layout}}">
+                    <label class="col-3 col-form-label">{{item.label}} <span *ngIf="item.required"
+                            class="text-danger">*</span></label>
+                    <div class="col-9">
+                        <input type="{{item.type}}" class="{{item.className}}" [(ngModel)]="item.value"
+                            name="{{item.name}}">
+                    </div>
+                </div>
+                <div *ngIf="item.type=='button'" [ngClass]="['btn-cont',item.alignHeader]">
+                    <input type="{{item.subtype}}" value="{{item.label}}" class="btn btn-primary">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

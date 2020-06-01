@@ -12,7 +12,7 @@ export class GeneratedFormComponent implements OnInit {
   formValid: boolean;
   formDetail: any = {
     id: '',
-    data: [],
+    formData: [],
     createdDate: '',
     formName: ''
   };
@@ -40,10 +40,12 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   getForm(id) {
-    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`
+    let url = `http://34.70.134.160/form/builder/${id}`
     this.appService.get(url).subscribe((res) => {
       this.toastr.success('Form Loaded Successfully', 'Success');
+      let data = JSON.parse(res['formdata'])
       this.formDetail = res;
+      this.formDetail.formData = data;
       this.isLoading = true;
       console.log('IndiformRes', res);
     }, err => {

@@ -1,9 +1,9 @@
 <app-loader [loader]="isLoading"></app-loader>
-<div class="alignCenter" *ngIf="formDetail.data.length>0">
+<div class="alignCenter" *ngIf="formDetail.formData.length>0">
 
-    <div class="generatedForm" *ngIf="formDetail.data.length>0">
+    <div class="generatedForm" *ngIf="formDetail.formData.length>0">
         <form id={{formDetail.id}} class="ftheme" (ngSubmit)="onFormSubmit(f)" #f="ngForm">
-            <div *ngFor="let item of formDetail.data">
+            <div *ngFor="let item of formDetail.formData">
                 <div class="mb-4 mt-1" *ngIf="item.type=='heading'">
                     <p [ngClass]="[item.defaultClass,item.alignHeader]">{{item.value}}</p>
                 </div>

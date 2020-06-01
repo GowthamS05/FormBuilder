@@ -19,6 +19,7 @@ export class FormbuilderComponent implements OnInit {
     label: "",
     value: ""
   };
+  isLoaded: boolean = true;
   @ViewChild('closeCreateFormModal') closeCreateFormModal: ElementRef;
   formName: string = '';
   fieldModels = [
@@ -291,15 +292,20 @@ export class FormbuilderComponent implements OnInit {
     });
   }
   getForm(id) {
-    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`
+    let url = `http://34.70.134.160/form/builder/${id}`;
+    this.isLoaded = false;
     this.appService.get(url).subscribe((res) => {
       this.toastr.success('Form Loaded Successfully', 'Success');
+      let data = JSON.parse(res['formdata']);
       this.model = {
-        attributes: res['data']
+        attributes: data
       };
       this.formName = res['formName'];
+      this.isLoaded = true;
+
       console.log('Update', res);
     }, err => {
+      this.isLoaded = true;
       this.toastr.error('Form not Created', 'Error');
     });
   }
@@ -377,7 +383,8 @@ export class FormbuilderComponent implements OnInit {
 
   }
   updateForm(id) {
-    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`;
+    let url = `http://34.70.134.160/form/builder/${id}`;
+    this.isLoaded = false;
     let data = {
       formName: this.formName,
       createdDate: getDateTime(),
@@ -386,10 +393,12 @@ export class FormbuilderComponent implements OnInit {
     this.appService.put(url, data).subscribe((res) => {
       this.toastr.success('Form Updated Successfully', 'Success');
       this.model.attributes = [];
+      this.isLoaded = true;
       this.route.navigateByUrl('/list');
     }, err => {
       this.toastr.error('Form Updated Created', 'Error');
       console.log('err', err);
+      this.isLoaded = true;
     });
   }
   addValue(values) {
@@ -397,21 +406,25 @@ export class FormbuilderComponent implements OnInit {
     this.value = { label: "", value: "" };
   }
   submitForm() {
-    let url = 'https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder';
+    let url = 'http://34.70.134.160/form/builder';
     let data = {
       id: this.makeName(6),
       formName: this.formName,
       createdDate: getDateTime(),
       data: [...this.model.attributes]
     };
+    this.isLoaded = false;
     this.appService.post(url, data).subscribe((res) => {
       this.toastr.success('Form Created Successfully', 'Success');
       console.log('res', res);
       this.model.attributes = [];
       this.route.navigateByUrl('/list');
+      this.isLoaded = true;
     }, err => {
       this.toastr.error('Form not Created', 'Error');
       console.log('err', err);
+      this.isLoaded = true;
+
     });
     this.formName = '';
   }

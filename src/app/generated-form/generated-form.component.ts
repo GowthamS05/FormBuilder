@@ -40,10 +40,11 @@ export class GeneratedFormComponent implements OnInit {
   }
 
   getForm(id) {
-    let url = `http://34.70.134.160/form/builder/${id}`
+    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`
     this.appService.get(url).subscribe((res) => {
       this.toastr.success('Form Loaded Successfully', 'Success');
-      let data = JSON.parse(res['formdata'])
+      // let data = JSON.parse(res['formdata'])
+      let data = res['formData']
       this.formDetail = res;
       this.formDetail.formData = data;
       this.isLoading = true;
@@ -57,7 +58,7 @@ export class GeneratedFormComponent implements OnInit {
 
   onFormSubmit(f) {
     this.formValid = true;
-    let validationArray = this.formDetail.data;
+    let validationArray = this.formDetail.formData;
     validationArray.forEach(field => {
       this.requiredValidation(field);
       this.validation(field);

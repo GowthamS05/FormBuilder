@@ -1,326 +1,15 @@
 {
   "formBuilder": [
     {
-      "formName": "Final Form ",
-      "createdDate": "30/5/2020 10:24:26",
-      "data": [
+      "formName": "Tesr1",
+      "createdDate": "6/6/2020 16:26:33",
+      "formData": [
         {
           "type": "heading",
           "icon": "fa-header",
           "label": "Heading",
-          "defaultClass": "h4",
-          "alignHeader": "text-center",
-          "listOfClass": [
-            {
-              "label": "H1",
-              "value": "h1"
-            },
-            {
-              "label": "H2",
-              "value": "h2"
-            },
-            {
-              "label": "H3",
-              "value": "h3"
-            },
-            {
-              "label": "H4",
-              "value": "h4"
-            },
-            {
-              "label": "H5",
-              "value": "h5"
-            },
-            {
-              "label": "H6",
-              "value": "h6"
-            }
-          ],
-          "alignItems": [
-            {
-              "label": "Left",
-              "class": "text-left"
-            },
-            {
-              "label": "Center",
-              "class": "text-center"
-            },
-            {
-              "label": "Right",
-              "class": "text-right"
-            }
-          ],
-          "value": "Registration Form",
-          "name": "headingxLXLNM",
-          "toggle": false
-        },
-        {
-          "type": "text",
-          "icon": "fa-font",
-          "label": "Name",
-          "placeholder": "Enter your name",
-          "className": "form-control",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "textkBMYvR",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "email",
-          "icon": "fa-envelope",
-          "label": "Email",
-          "description": "Enter your email",
-          "placeholder": "Enter your email",
-          "className": "form-control",
-          "layout": "row",
-          "regex": "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+).([a-zA-Z]{2,5})$",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "emailDBravO",
-          "toggle": false,
-          "required": true,
-          "validation": true
-        },
-        {
-          "type": "textarea",
-          "icon": "fa-text-width",
-          "label": "Address",
-          "placeholder": "Enter Information",
-          "rows": 4,
-          "className": "form-control",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "textarea6LAb9c",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "date",
-          "icon": "fa-calendar",
-          "label": "DOB",
-          "placeholder": "Date",
-          "className": "form-control",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "date7PCdDb",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "number",
-          "label": "Age",
-          "icon": "fa-html5",
-          "placeholder": "Enter Number",
-          "className": "form-control",
-          "min": 20,
-          "max": 87,
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "numberPMzvvp",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "text",
-          "icon": "fa-phone",
-          "label": "Phone",
-          "placeholder": "Enter your phone number",
-          "className": "form-control",
-          "subtype": "Phone",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "name": "textbL66oE",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "radio",
-          "icon": "fa-circle-thin",
-          "label": "Intersted in Reading",
-          "description": "Radio boxes",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "values": [
-            {
-              "label": "Yes",
-              "value": "radio-1"
-            },
-            {
-              "label": "No",
-              "value": "radio-2"
-            }
-          ],
-          "name": "radioLpi2p8",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "checkbox",
-          "label": "Education",
-          "icon": "fa-square-o",
-          "description": "Checkbox",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "values": [
-            {
-              "label": "UG",
-              "value": "UG"
-            },
-            {
-              "label": "PG",
-              "value": "PG"
-            }
-          ],
-          "name": "checkbox59trxO",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "select",
-          "icon": "fa-caret-square-o-down",
-          "label": "Medium",
-          "description": "Select",
-          "placeholder": "Select Values",
-          "className": "form-control",
-          "layout": "row",
-          "layoutList": [
-            {
-              "label": "Horizontal",
-              "value": "row"
-            },
-            {
-              "label": "Vertical",
-              "value": "column"
-            }
-          ],
-          "values": [
-            {
-              "label": "CBSE",
-              "value": "CBSE"
-            },
-            {
-              "label": "Matriculation",
-              "value": "Matriculation"
-            },
-            {
-              "label": "State Board",
-              "value": "Stateboard"
-            }
-          ],
-          "name": "selectm4SswD",
-          "toggle": false,
-          "required": true
-        },
-        {
-          "type": "button",
-          "icon": "fa-paper-plane",
-          "subtype": "submit",
-          "label": "Submit",
-          "alignHeader": "text-center",
-          "alignItems": [
-            {
-              "label": "Left",
-              "class": "text-left"
-            },
-            {
-              "label": "Center",
-              "class": "text-center"
-            },
-            {
-              "label": "Right",
-              "class": "text-right"
-            }
-          ],
-          "name": "buttonp4bnr8",
-          "toggle": false
-        }
-      ],
-      "id": "BNIz0D"
-    },
-    {
-      "id": "nc3cqK",
-      "formName": "RegisterMerf Form",
-      "createdDate": "27/5/2020 20:12:10",
-      "data": [
-        {
-          "type": "heading",
-          "icon": "fa-header",
-          "label": "Heading",
-          "name": "heading-1590590511136",
           "defaultClass": "h1",
-          "alignHeader": "text-center",
+          "alignHeader": "text-left",
           "listOfClass": [
             {
               "label": "H1",
@@ -362,16 +51,15 @@
             }
           ],
           "value": "This is a Sample Heading",
-          "toggle": true
+          "name": "headinghQtZvg"
         },
         {
           "type": "text",
           "icon": "fa-font",
-          "label": "TextBox",
+          "label": "Text Field",
           "placeholder": "Enter your name",
           "className": "form-control",
           "layout": "row",
-          "name": "text-1590590512268",
           "layoutList": [
             {
               "label": "Horizontal",
@@ -382,10 +70,243 @@
               "value": "column"
             }
           ],
-          "toggle": true,
-          "required": true
+          "name": "textdQDOF3"
+        },
+        {
+          "type": "email",
+          "icon": "fa-envelope",
+          "label": "Email",
+          "description": "Enter your email",
+          "placeholder": "Enter your email",
+          "className": "form-control",
+          "layout": "row",
+          "regex": "^([a-zA-Z0-9_.-]+)@([a-zA-Z0-9_.-]+).([a-zA-Z]{2,5})$",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "emailOAPe8q"
+        },
+        {
+          "type": "text",
+          "icon": "fa-phone",
+          "label": "Phone",
+          "placeholder": "Enter your phone number",
+          "className": "form-control",
+          "subtype": "Phone",
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "textPFMfAG"
+        },
+        {
+          "type": "textarea",
+          "icon": "fa-text-width",
+          "label": "Textarea",
+          "placeholder": "Enter Information",
+          "rows": 3,
+          "className": "form-control",
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "textareawhS0TH"
         }
-      ]
+      ],
+      "id": "5UR5RU"
+    },
+    {
+      "formName": "Registration Forms",
+      "createdDate": "6/6/2020 16:33:41",
+      "formData": [
+        {
+          "type": "heading",
+          "icon": "fa-header",
+          "label": "Heading",
+          "defaultClass": "h1",
+          "alignHeader": "text-left",
+          "listOfClass": [
+            {
+              "label": "H1",
+              "value": "h1"
+            },
+            {
+              "label": "H2",
+              "value": "h2"
+            },
+            {
+              "label": "H3",
+              "value": "h3"
+            },
+            {
+              "label": "H4",
+              "value": "h4"
+            },
+            {
+              "label": "H5",
+              "value": "h5"
+            },
+            {
+              "label": "H6",
+              "value": "h6"
+            }
+          ],
+          "alignItems": [
+            {
+              "label": "Left",
+              "class": "text-left"
+            },
+            {
+              "label": "Center",
+              "class": "text-center"
+            },
+            {
+              "label": "Right",
+              "class": "text-right"
+            }
+          ],
+          "value": "This is a Sample Heading",
+          "name": "headingnw1ehF"
+        },
+        {
+          "type": "number",
+          "label": "Number",
+          "icon": "fa-html5",
+          "placeholder": "Enter Number",
+          "className": "form-control",
+          "min": 0,
+          "max": 90,
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "numberIrWPQa",
+          "toggle": false,
+          "required": true
+        },
+        {
+          "type": "text",
+          "icon": "fa-phone",
+          "label": "Phone",
+          "placeholder": "Enter your phone number",
+          "className": "form-control",
+          "subtype": "Phone",
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "texthz6zj9",
+          "toggle": false,
+          "required": true
+        },
+        {
+          "type": "radio",
+          "icon": "fa-circle-thin",
+          "label": "Radio",
+          "description": "Radio boxes",
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "values": [
+            {
+              "label": "Radio 1",
+              "value": "radio-1"
+            },
+            {
+              "label": "Radio 2",
+              "value": "radio-2"
+            }
+          ],
+          "name": "radioamkouW"
+        },
+        {
+          "type": "textarea",
+          "icon": "fa-text-width",
+          "label": "Textarea",
+          "placeholder": "Enter Information",
+          "rows": 3,
+          "className": "form-control",
+          "layout": "row",
+          "layoutList": [
+            {
+              "label": "Horizontal",
+              "value": "row"
+            },
+            {
+              "label": "Vertical",
+              "value": "column"
+            }
+          ],
+          "name": "textareaWRNt6z"
+        },
+        {
+          "type": "button",
+          "icon": "fa-paper-plane",
+          "subtype": "submit",
+          "label": "Submit",
+          "alignHeader": "text-left",
+          "alignItems": [
+            {
+              "label": "Left",
+              "class": "text-left"
+            },
+            {
+              "label": "Center",
+              "class": "text-center"
+            },
+            {
+              "label": "Right",
+              "class": "text-right"
+            }
+          ],
+          "name": "buttonJBtZbe",
+          "toggle": false
+        }
+      ],
+      "id": "IJmwMs"
     }
   ]
 }

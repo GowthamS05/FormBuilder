@@ -14,7 +14,7 @@ export class ListOfFormsComponent implements OnInit {
   @ViewChild('closeDeleteForm') closeDeleteForm: ElementRef;
 
   isLoading: boolean = false;
-  url = 'http://34.70.134.160/form/builder/list';
+  url = 'https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder';
   constructor(private appService: AppService, private toastr: ToastrService, private router: Router) {
     this.getForms();
   }
@@ -37,7 +37,7 @@ export class ListOfFormsComponent implements OnInit {
   ngOnInit(): void {
   }
   deleteForm(item) {
-    let url = `http://34.70.134.160/form/builder/${item.id}`;
+    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${item.id}`;
     this.appService.delete(url).subscribe((res) => {
       this.toastr.success('Form Deleted SuccessFully', 'Success');
       this.closeDeleteForm.nativeElement.click();

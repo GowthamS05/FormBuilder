@@ -292,11 +292,12 @@ export class FormbuilderComponent implements OnInit {
     });
   }
   getForm(id) {
-    let url = `http://34.70.134.160/form/builder/${id}`;
+    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`;
     this.isLoaded = false;
     this.appService.get(url).subscribe((res) => {
       this.toastr.success('Form Loaded Successfully', 'Success');
-      let data = JSON.parse(res['formdata']);
+      // let data = JSON.parse(res['formdata']);
+      let data = res['formData'];
       this.model = {
         attributes: data
       };
@@ -383,12 +384,12 @@ export class FormbuilderComponent implements OnInit {
 
   }
   updateForm(id) {
-    let url = `http://34.70.134.160/form/builder/${id}`;
+    let url = `https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder/${id}`;
     this.isLoaded = false;
     let data = {
       formName: this.formName,
       createdDate: getDateTime(),
-      data: [...this.model.attributes]
+      formData: [...this.model.attributes]
     };
     this.appService.put(url, data).subscribe((res) => {
       this.toastr.success('Form Updated Successfully', 'Success');
@@ -406,12 +407,12 @@ export class FormbuilderComponent implements OnInit {
     this.value = { label: "", value: "" };
   }
   submitForm() {
-    let url = 'http://34.70.134.160/form/builder';
+    let url = 'https://my-json-server.typicode.com/GowthamS05/FormBuilder/formBuilder';
     let data = {
       id: this.makeName(6),
       formName: this.formName,
       createdDate: getDateTime(),
-      data: [...this.model.attributes]
+      formData: [...this.model.attributes]
     };
     this.isLoaded = false;
     this.appService.post(url, data).subscribe((res) => {
